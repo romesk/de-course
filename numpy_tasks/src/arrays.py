@@ -3,7 +3,7 @@ import sys
 import numpy as np
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from numpy_tasks.utils import print_array  # noqa: E402
+from src.utils import print_array  # noqa: E402
 
 
 def generate_array(start: int, end: int, shape: tuple) -> np.ndarray:
@@ -19,7 +19,8 @@ def generate_array(start: int, end: int, shape: tuple) -> np.ndarray:
     numpy.ndarray: A NumPy array of the specified shape with values linearly spaced between start and end.
     """
     num_elements = np.prod(shape)
-    array = np.linspace(start, end, num=num_elements)
+    # array with values ranging from start to end with equal step
+    array = np.linspace(start, end, num_elements)
     return array.reshape(shape)
 
 

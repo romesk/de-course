@@ -1,6 +1,10 @@
 import numpy as np
 
 
+def format_float(num):
+    return ("%i" if num == int(num) else "%s") % num
+
+
 def print_array(arr: np.ndarray, msg: str = "", precision=2) -> None:
     """
     Display the beautified array with a given message.
@@ -17,9 +21,11 @@ def print_array(arr: np.ndarray, msg: str = "", precision=2) -> None:
     # Set print options for NumPy arrays
     np.set_printoptions(precision=precision, suppress=True)
 
-    # Convert array to string with custom formatting
+    # Convert array to string with custom formatting. don't show decimal points for integers
     array_str = np.array2string(
-        arr, formatter={"float_kind": lambda x: f"{x: .{precision}f}"}, separator=", "
+        arr,
+        formatter={"float_kind": lambda x: format_float(x)},
+        separator=", ",
     )
 
     # Print the formatted array
