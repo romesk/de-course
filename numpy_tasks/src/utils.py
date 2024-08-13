@@ -2,7 +2,7 @@ import numpy as np
 
 
 def format_float(num):
-    return ("%i" if num == int(num) else "%s") % num
+    return ("%i" if num == int(num) else f"{num:.2f}") % num
 
 
 def print_array(arr: np.ndarray, msg: str = "", precision=2) -> None:
