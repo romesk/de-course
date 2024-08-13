@@ -1,3 +1,5 @@
+# Practical Task 2: Analyzing and Visualizing E-Commerce Transactions with NumPy
+
 import os
 import sys
 import datetime

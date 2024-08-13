@@ -1,3 +1,5 @@
+# Practical Task 3: Array Manipulation with Separate Output Function in NumPy
+
 import os
 import sys
 import numpy as np

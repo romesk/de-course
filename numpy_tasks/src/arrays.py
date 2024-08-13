@@ -1,3 +1,5 @@
+# Practical Task 1: Basic Array Creation and Manipulation with NumPy
+
 import os
 import sys
 import numpy as np
