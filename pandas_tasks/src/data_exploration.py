@@ -38,31 +38,39 @@ def main():
     data_cleaned["last_review"] = data_cleaned["last_review"].fillna("NaT")
     print_dataframe_info(data_cleaned, "Dataframe NYC cleaned:")
 
-    # Categorize listings by price range
+    # Categorize Listings by Price Range: Create a new column price_category that categorizes listings into different price ranges, such as Low, Medium, High
     print_divider("[Task 3.1]")
+    data_cleaned["price_category"] = pd.cut(
+        data_cleaned["price"],
+        bins=[0, 100, 300, data_cleaned["price"].max()],
+        labels=["Low", "Medium", "High"],
+    )
+
+
+    # Categorize listings by price range
+    print_divider("[Task 3.2]")
     # Create a length_of_stay_category column: Categorize listings based on their minimum_nights into short-term, medium-term, and long-term stays.
-    data_copy = data_cleaned.copy()
-    data_copy["length_of_stay_category"] = pd.cut(
-        data_copy["minimum_nights"],
-        bins=[0, 3, 14, data_copy["minimum_nights"].max()],
+    data_cleaned["length_of_stay_category"] = pd.cut(
+        data_cleaned["minimum_nights"],
+        bins=[0, 3, 14, data_cleaned["minimum_nights"].max()],
         labels=["short-term", "medium-term", "long-term"],
     )
-    print_dataframe_info(data_copy, "Dataframe NYC categorized by length of stay:")
+    print_dataframe_info(data_cleaned, "Dataframe NYC categorized by length of stay:")
 
     # Verify that the data transformations and cleaning steps were successful by reinspecting the DataFrame.
     print_divider("[Task 4.1]")
-    print_dataframe_info(data_copy, "Dataframe NYC categorized by length of stay:")
+    print_dataframe_info(data_cleaned, "Dataframe NYC categorized by length of stay:")
 
     # Ensure that the dataset has no missing values in critical columns (name, host_name, last_review).
     print_divider("[Task 4.2]")
 
-    np.testing.assert_array_equal(data_copy["name"].notnull(), True)
-    np.testing.assert_array_equal(data_copy["host_name"].notnull(), True)
-    np.testing.assert_array_equal(data_copy["last_review"].notnull(), True)
+    np.testing.assert_array_equal(data_cleaned["name"].notnull(), True)
+    np.testing.assert_array_equal(data_cleaned["host_name"].notnull(), True)
+    np.testing.assert_array_equal(data_cleaned["last_review"].notnull(), True)
 
     # Confirm that all price values are greater than 0. If you find rows with price equal to 0, remove them.
     print_divider("[Task 4.3]")
-    data_cleaned = data_copy[data_copy["price"] > 0]
+    data_cleaned = data_cleaned[data_cleaned["price"] > 0]
     np.testing.assert_array_equal(data_cleaned["price"] > 0, True)
 
     # Save the cleaned dataset to a new CSV file
