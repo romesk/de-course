@@ -33,3 +33,14 @@ def print_grouped_data(grouped_data: pd.DataFrame, msg: str = None):
     if msg:
         print(msg)
     print(grouped_data)
+
+
+def print_analysis_results(data, message: str = ""):
+    if message:
+        print(message)
+
+    print("descriptive stats:")
+    print(data.describe())
+
+    print("\nData:")
+    print(data)
